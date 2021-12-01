@@ -19,7 +19,9 @@ sum(increases > 0, na.rm = TRUE)
 `sum(input > lag(input, 3), na.rm = TRUE)`
 
 
-### crappy code
-`p2<- rollsum(input, 3)
+### crappy code for part 2
+```
+p2<- rollsum(input, 3)
 p2.bis <- p2 -lag(p2)
-sum(p2.bis > 0 , na.rm = T)`
+sum(p2.bis > 0 , na.rm = T)
+```
