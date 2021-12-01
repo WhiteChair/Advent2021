@@ -1,10 +1,16 @@
 # Advent2021
 
+## What is this project? 
 
-Going to attempt the advent of code challenge for the first time. 
+I am participating in the  [the advent of code](https://adventofcode.com/) challenge for the first time. 
 I will be using excel, R and I will use this as an opportunity to get better at python. 
 
-Will post the solutions here, as messy as they probably will be. 
+my solutions will be posted here, as messy as they probably will be. 
+
+### How is this usefull to you? 
+ 
+Maybe you are stuck and would like to see how so solve the issue. Be sure to look at files called `clean` if you don't want to see horrors. 
+
 
 | Day | Solution | Type of problem |
 |-----|----------|-----------------|
