@@ -1,0 +1,68 @@
+---
+title: "day2 advent of code "
+output: html_notebook
+---
+### part1 
+our sub starts at both Position and height 0. 
+
+we can only move forward but we can move down or up in depth. 
+Hence we need to make sure if V1 == up we decrease the value of depth. 
+
+Afterthat we can do a simple summarion of the forward movements and the depth movements (using group_buy) and multiply both numbers in the end. 
+
+```{r libraries}
+library(dplyr)
+```
+
+
+```{r data wrangling part 1}
+
+# Forward position
+forward.tibble<- as_tibble(forward)
+
+forward <- filter(forward.tibble, V1 == 'forward') %>% summarise(sum(V2))
+
+
+#Depth
+up <- -1*filter(forward.tibble, V1 == 'up') %>% summarise(sum(V2))
+down <- filter(forward.tibble, V1 == 'down') %>% summarise(sum(V2))
+
+# calc
+forward*sum(up, down)
+
+
+# neat trick to look at it like that
+table(forward.tibble)
+
+```
+### Part 2 
+
+down X increases your aim by X units.
+up X decreases your aim by X units.
+forward X does two things:
+It increases your horizontal position by X units.
+It increases your depth by your aim multiplied by X.
+
+
+```{r}
+horizontal <- 0
+depth <- 0
+aim <- 0
+for(i in 1:length(forward.tibble$V1)){
+  direction <- forward.tibble$V1[i]
+  distance <- forward.tibble$V2[i]
+  if(direction=="forward"){
+    horizontal <- horizontal+distance
+    depth <- depth+(aim*distance)
+  } else if(direction=="up"){
+    aim <- aim-distance
+  } else if(direction=="down"){
+    aim <- aim+distance
+  }
+}
+print(horizontal*depth)
+```
+```{r part 2 adding the aim}
+mutate(forward.tibble, aim = ifelse(V1 == 'up', -1*V2, V2))
+
+```
