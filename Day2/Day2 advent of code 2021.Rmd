@@ -45,18 +45,21 @@ It increases your depth by your aim multiplied by X.
 
 
 ```{r}
+# we start from zero.
 horizontal <- 0
 depth <- 0
 aim <- 0
+
 for(i in 1:length(forward.tibble$V1)){
   direction <- forward.tibble$V1[i]
   distance <- forward.tibble$V2[i]
   if(direction=="forward"){
     horizontal <- horizontal+distance
-    depth <- depth+(aim*distance)
-  } else if(direction=="up"){
+    depth <- depth+(aim*distance) # It increases your depth by your aim multiplied by X.
+  } else if(direction=="up"){ # up X decreases your aim by X units.
+forward X does two things:
     aim <- aim-distance
-  } else if(direction=="down"){
+  } else if(direction=="down"){ # down X increases your aim by X units.
     aim <- aim+distance
   }
 }
