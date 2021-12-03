@@ -1,0 +1,47 @@
+---
+title: "Day3"
+output: html_notebook
+---
+#Part 1
+
+first i split the binary numbers in different columns using Excel. 
+This can be done in R using tidyr::separate(data, c("1"..."12")) but its so easy in excel i preffer it :D
+```{r libraries}
+library(tidyverse)
+```
+
+```{r first attempt very very dirty and bad}
+input<-select(input, -Column1.13)
+
+
+table(input$Column1.1)
+table(input$Column1.2)
+#do this for 12 columns and manually check what's the most common digit in each 
+
+```
+
+for the binary number I used this [website](https://www.rapidtables.com/convert/number/binary-to-decimal.html)
+
+#Part 2
+
+very neat answer i found on [reddit](https://www.reddit.com/r/adventofcode/comments/r7r0ff/comment/hn1kd75/?utm_source=share&utm_medium=web2x&context=3) 
+
+Also note neater way of what i did in excel `data03 <- do.call(rbind, strsplit(readLines("Day3.txt"), ""))`
+
+```{r part2}
+data03 <- do.call(rbind, strsplit(readLines("Day3.txt"), ""))
+    find_c_o2 <- function(o2 = TRUE) {
+      res <- data03
+      for (k in seq_along(data03[1, ])) {
+         x <- as.integer(res[,k])
+         idx <- which(x == (if (o2) 1L else 0L))
+         res <- if (sum(x) >= length(x) / 2)  res[idx, ] else res[-idx,]
+         if (length(res) == length(data03[1, ])) break
+      }
+      return(strtoi(paste(res, collapse = ""), base = 2))
+    }
+    
+    find_c_o2(TRUE) * find_c_o2(FALSE)
+```
+
+
